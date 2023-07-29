@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import Landing from '../components/Landing'
 
 export default function Home() {
   return (
@@ -12,7 +13,7 @@ export default function Home() {
         {/* Add Link Here */}
         <link rel="canonical" href="" key="canonical" />
       </Head>
-
+      <Landing />
     </div>
   )
 }
