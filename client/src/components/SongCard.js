@@ -26,7 +26,7 @@ const SongCard = ({ imgSrc, song, songLink, artistList,
                         </a>
                     </div>
                     <div className="text-grey">
-                        <a href={songLink} className="text-2xl w-72 block overflow-hidden whitespace-nowrap overflow-ellipsis">{song}</a>
+                        <a href={songLink} className="text-xl w-72 block overflow-hidden whitespace-nowrap overflow-ellipsis">{song}</a>
                         <a href={albumLink} className="text-lg w-60 block overflow-hidden whitespace-nowrap overflow-ellipsis">{album}</a>
                         {artistList && artistList.length > 0 && (
                             <div className="">
