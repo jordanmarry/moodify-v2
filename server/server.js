@@ -2,10 +2,11 @@ const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
 const UserModel = require("./model/Users")
+const SongModel = require("./model/Songs")
 const sanitize = require('mongo-sanitize')
 const bcrypt = require("bcrypt")
-const axios = require('axios')
 const puppeteer = require('puppeteer')
+const cron = require('node-cron')
 
 require('dotenv').config()
 
@@ -16,7 +17,10 @@ app.use(cors())
 // Connect to database
 mongoose.connect(process.env.MDBCONNECT)
 
-app.get("/", async (req, res) => {
+const topTenSongs = async () => {
+
+    await SongModel.deleteMany({});
+
     const playlistURL = 'https://open.spotify.com/playlist/37i9dQZF1DXcBWIGoYBM5M'
 
     try {
@@ -37,7 +41,8 @@ app.get("/", async (req, res) => {
 
         // grab anchorSelector to get the song title and link to the song
         const anchorElements = await page.$$eval(anchorSelector, (anchors) =>
-            anchors.slice(0, 10).map((a) => ({
+            anchors.slice(0, 10).map((a, index) => ({
+                chartPos: index + 1,
                 song: a.innerText,
                 songLink: a.href,
             }))
@@ -62,7 +67,7 @@ app.get("/", async (req, res) => {
         )
 
         const imageArr = []
-        // TODO : using the song link, grab the big photo from it 
+        // using the song link, grab the big photo from it 
         for (let i = 0; i < anchorElements.length; i++) {
             const songUrl = anchorElements[i].songLink
 
@@ -76,8 +81,6 @@ app.get("/", async (req, res) => {
             imageArr.push({albumCover: firstImg})
         }
 
-        console.log(imageArr)
-
         await browser.close()
 
         const combinedArray = anchorElements.map((elem, index) => ({
@@ -88,14 +91,27 @@ app.get("/", async (req, res) => {
         }))
         
         // Return the scraped data as JSON
-        res.json(combinedArray)
+        for (let i = 0; i < combinedArray.length; i++) {
+            SongModel.create(combinedArray[i]) 
+        }
     } 
 
     catch (error) {
-        res.json('Error while scraping the data')
+        scrapedData = null;
     }
+};
 
-});
+//
+// UNCOMMENT BELOW SOON
+//
+
+// // This gets top 10 songs of the day when the backend starts up
+// topTenSongs();
+
+// // This gets top 10 songs of the day when 12 AM passes
+// cron.schedule('0 12 * * *', () => {
+//     scrapePlaylist();
+// });
 
 // Check login compared to database
 app.post("/login", (req, res) => {
