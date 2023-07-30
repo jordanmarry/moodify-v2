@@ -11,7 +11,7 @@ const Navbar = () => {
     }
 
     return (
-        <div className='fixed left-0 top-0 w-full z-10 ease-in duration-300 pr-12 pl-16 pt-2'>
+        <div className='fixed left-0 top-0 w-full z-10 ease-in duration-300 pr-12 pl-16 pt-2 bg-grey'>
             <div className='max-w-{1240px} m-auto flex justify-between items-center p-4 text-off-white'>
                 <Link href='/'>
                     <h1 className='font-bold text-4xl text-green'>moodify</h1>

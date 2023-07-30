@@ -7,6 +7,7 @@ const sanitize = require('mongo-sanitize')
 const bcrypt = require("bcrypt")
 const puppeteer = require('puppeteer')
 const cron = require('node-cron')
+const SongsModel = require('./model/Songs')
 
 require('dotenv').config()
 
@@ -114,6 +115,16 @@ const topTenSongs = async () => {
 // cron.schedule('0 12 * * *', () => {
 //     scrapePlaylist();
 // });
+
+app.get("/", async (req, res) => {
+    try {
+        // Fetch data from MongoDB using Mongoose
+        const songs = await SongsModel.find({});
+        res.json(songs);
+    } catch (err) {
+        res.json('Error Retreiving Data');
+    }
+})
 
 // Check login compared to database
 app.post("/login", (req, res) => {
