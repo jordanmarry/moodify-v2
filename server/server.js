@@ -17,6 +17,8 @@ app.use(cors())
 // Connect to database
 mongoose.connect(process.env.MDBCONNECT)
 
+// get the Top 10 songs from today's top hits. 
+// then the songs get added to the database
 const topTenSongs = async () => {
 
     await SongModel.deleteMany({});
@@ -105,10 +107,10 @@ const topTenSongs = async () => {
 // UNCOMMENT BELOW SOON
 //
 
-// // This gets top 10 songs of the day when the backend starts up
+// // Calls top 10 songs function when the backend starts up
 // topTenSongs();
 
-// // This gets top 10 songs of the day when 12 AM passes
+// // Calls top 10 songs function when 12 PM passes
 // cron.schedule('0 12 * * *', () => {
 //     scrapePlaylist();
 // });
