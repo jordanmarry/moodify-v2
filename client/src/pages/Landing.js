@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Link from 'next/link';
-import SongCard from "./SongCard";
+import SongCard from "../components/SongCard";
 
 const Landing = () => {
 
@@ -53,7 +53,7 @@ const Landing = () => {
     return (
         <div className="text-off-white flex items-center justify-between h-screen ">
             <div className="text-left w-2/5">
-                <p className="text-5xl font-bold"> Express Your <span className="text-dark-blue">Mood</span> Through Music. </p>
+                <p className="text-5xl font-bold"> Express Your <span className="text-dark-blue">Mood</span> <br/> Through Music. </p>
                 <div className="pt-6">
                     <Link href='/login' className=" text-xl text-off-white border border-dark-blue rounded-md px-12 py-2 bg-dark-blue hover:bg-off-white hover:text-dark-blue transition-all duration-500"> login </Link>  
                 </div>
