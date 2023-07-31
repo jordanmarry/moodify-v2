@@ -7,12 +7,22 @@ const Landing = () => {
     const [topData, setTopData] = useState(null);
     const [currentCardIndex, setCurrentCardIndex] = useState(0)
 
+    function compare( a, b ) {
+        if ( a.chartPos < b.chartPos ){
+            return -1;
+        }
+        if ( a.chartPos > b.chartPos ){
+            return 1;
+        }
+        return 0;
+    }
 
     // fetching data from localhost where the songs were stored
     const fetchTopData = async () => {
         try {
             const response = await fetch('http://localhost:5050/')
             const data = await response.json()
+            data.sort( compare );
             if (data === 'Error Retreiving Data'){
                 setTopData(null)
             } else {
