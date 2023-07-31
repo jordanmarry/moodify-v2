@@ -51,16 +51,16 @@ const Landing = () => {
     }
 
     return (
-        <div className="text-off-white flex items-center justify-between h-screen pt-24">
+        <div className="text-off-white flex items-center justify-between h-screen  ">
             <div className="text-left w-2/5">
-                <p className="text-5xl font-bold"> Express Your <span className="text-green">Mood</span> Through Music. </p>
+                <p className="text-5xl font-bold"> Express Your <span className="text-dark-blue">Mood</span> Through Music. </p>
                 <div className="pt-6">
-                    <Link href='/login' className=" text-xl text-grey border border-green rounded-md px-12 py-2 bg-green hover:bg-off-white transition-all duration-500"> login </Link>  
+                    <Link href='/login' className=" text-xl text-off-white border border-dark-blue rounded-md px-12 py-2 bg-dark-blue hover:bg-off-white hover:text-dark-blue transition-all duration-500"> login </Link>  
                 </div>
             </div>
             {topData !== null && topData.length > 0 && (
                 <div className="w-2/5">
-                    <h1 className="text-2xl text-center font-bold pb-8"> Today's Top 10 Hits By Spotify</h1>
+                    <h1 className="text-2xl text-center font-bold pb-8 text-off-white"> Today's Top 10 Hits By Spotify</h1>
                     <div className="">
                         <SongCard
                             imgSrc={topData[currentCardIndex].albumCover}
@@ -71,8 +71,8 @@ const Landing = () => {
                             albumLink={topData[currentCardIndex].albumLink}
                         />
                         <div className="flex justify-center text-grey mt-4">
-                            <button className="px-14 py-2 border border-black rounded-md mr-6 bg-off-white" onClick={handlePrevCard}>Prev</button>
-                            <button className="px-14 py-2 border border-black rounded-md bg-off-white" onClick={handleNextCard}>Next</button>
+                            <button className="px-14 py-2 rounded-md mr-6 bg-off-white" onClick={handlePrevCard}>Prev</button>
+                            <button className="px-14 py-2 rounded-md bg-off-white" onClick={handleNextCard}>Next</button>
                         </div>
                     </div>
                 </div>
