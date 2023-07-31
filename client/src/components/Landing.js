@@ -60,7 +60,7 @@ const Landing = () => {
             </div>
             {topData !== null && topData.length > 0 && (
                 <div className="w-2/5">
-                    <h1 className="text-2xl text-center font-bold pb-8 text-off-white"> Today's Top 10 Hits By Spotify</h1>
+                    <h1 className="text-2xl text-center font-bold pb-4 pt-8 text-off-white"> Today's Top 10 Hits By Spotify</h1>
                     <div className="">
                         <SongCard
                             imgSrc={topData[currentCardIndex].albumCover}
