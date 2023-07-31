@@ -51,7 +51,7 @@ const Landing = () => {
     }
 
     return (
-        <div className="text-off-white flex items-center justify-between h-screen  ">
+        <div className="text-off-white flex items-center justify-between h-screen ">
             <div className="text-left w-2/5">
                 <p className="text-5xl font-bold"> Express Your <span className="text-dark-blue">Mood</span> Through Music. </p>
                 <div className="pt-6">
@@ -77,7 +77,6 @@ const Landing = () => {
                     </div>
                 </div>
             )}
-            
         </div>
     )
 }
