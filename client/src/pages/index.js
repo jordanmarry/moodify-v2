@@ -7,7 +7,7 @@ export default function Home() {
       <Head>
         <title>Moodify</title>
         <meta name="description" content="Express your mood through songs. Moodify is the way to show your emotions to friends" />
-        <meta name="keywords" content="Moodify, Spotify Mood, Mood Songs" />
+        <meta name="keywords" content="Moodify, Spotify Mood, Mood Songs, Spotify, Spotify Moodify" />
         <meta property="og:title" content="Moodify" />
         <meta property="og:description" content="Express your mood through songs. Moodify is the way to show your emotions to friends" />
         {/* Add Link Here */}

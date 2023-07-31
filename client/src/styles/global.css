@@ -7,7 +7,7 @@ html {
 }
 
 body {
-    background-color: #222629;
+    background-image: linear-gradient(rgb(114, 162, 204),  rgba(223, 155, 216, 0.5));
     padding-right: 5rem;
     padding-left: 5rem;
 }
