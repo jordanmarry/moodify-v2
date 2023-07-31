@@ -1,12 +1,5 @@
 import React, { useEffect } from "react";
 
-const truncateText = (text, maxLength) => {
-    if (text.length > maxLength) {
-        return text.substring(0, maxLength) + "...";
-    }
-    return text;
-};
-
 const SongCard = ({ imgSrc, song, songLink, artistList, 
     album, albumLink }) => {
 
