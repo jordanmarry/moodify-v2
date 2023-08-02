@@ -1,17 +1,29 @@
-import React, {useState} from 'react';
-import Link from 'next/link';
+import React, { useState, useEffect } from 'react'
+import Link from 'next/link'
 import {AiOutlineMenu, AiOutlineClose} from 'react-icons/ai'
 
 const Navbar = () => {
-
+    const [scrolled, setScrolled] = useState(false)
     const [nav, setNav] = useState(false)
 
     const handleNav = () => {
         setNav(!nav)
     }
 
+    useEffect(() => {
+        const handleScroll = () => {
+          setScrolled(window.scrollY > 0);
+        };
+    
+        window.addEventListener("scroll", handleScroll);
+    
+        return () => {
+          window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
+        
     return (
-        <div className='fixed left-0 top-0 w-full z-10 ease-in duration-300 pr-12 pl-16 pt-2 bg-transparent'>
+        <div className={`fixed left-0 top-0 w-full z-10 ease-in duration-300 pr-12 pl-16 pt-2 ${scrolled ? 'bg-light-blue' : 'bg-transparent'}`}>
             <div className='max-w-{1240px} m-auto flex justify-between items-center p-4 text-off-white'>
                 <Link href='/'>
                     <h1 className='font-bold text-4xl text-off-white hover:text-pink transition-all duration-500'>moodify.</h1>

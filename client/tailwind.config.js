@@ -16,7 +16,7 @@ module.exports = {
         'light-blue': '#88C1F2',
         'dark-blue': '#5F87A9',
         'pink': '#DF9BD8',
-        'off-white': '#DDDDDD',
+        'off-white': '#EEEEEE',
         'grey': '#222629',
       },
     },
