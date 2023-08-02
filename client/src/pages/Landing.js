@@ -51,12 +51,12 @@ const Landing = () => {
     }
 
     return (
-        <div className="text-off-white flex items-center justify-between h-screen ">
+        <div className="text-off-white flex items-center justify-between h-screen">
             <div className="text-left w-2/5">
-                <p className="text-5xl font-bold"> Express Your <span className="text-dark-blue">Mood</span> <br/> Through Music. </p>
-                <div className="pt-6">
-                    <Link href='/login' className=" text-xl text-off-white border border-dark-blue rounded-md px-12 py-2 bg-dark-blue hover:bg-off-white hover:text-dark-blue transition-all duration-500"> login </Link>  
-                </div>
+                <p className="text-5xl font-bold pb-6"> Express Your <span className="text-dark-blue">Mood</span> <br/> Through Music. </p>
+                <Link href='/login' title="login page" className=" text-xl text-off-white border border-dark-blue rounded-md px-12 py-2 bg-dark-blue hover:bg-off-white hover:text-dark-blue transition-all duration-500">
+                    Sign in
+                </Link>
             </div>
             {topData !== null && topData.length > 0 && (
                 <div className="w-2/5">
