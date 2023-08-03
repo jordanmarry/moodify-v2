@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 import SongCard from "../components/SongCard";
 
 const Landing = () => {
-    const router = useRouter();
     const [topData, setTopData] = useState(null);
     const [currentCardIndex, setCurrentCardIndex] = useState(0)
 

@@ -1,5 +1,5 @@
-// pages/callback.js
 import { useEffect } from 'react';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 
 const Callback = () => {
@@ -23,7 +23,9 @@ const Callback = () => {
 
   return (
     <div className='h-screen'>
-      <title>Moodify</title>
+      <Head>
+        <title>Moodify</title>
+      </Head>
     </div>
   );
 };
