@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import Image from "next/image";
 
 const SongCard = ({ imgSrc, song, songLink, artistList, 
     album, albumLink }) => {
@@ -9,7 +10,7 @@ const SongCard = ({ imgSrc, song, songLink, artistList,
                 <div className="p-4">
                     <div className="">
                         <a href={songLink}>
-                            <img src={imgSrc} alt="Album cover" className=""/>
+                            <Image src={imgSrc} alt="Album cover" priority={true} width={300} height={300} className=""/>
                         </a>
                     </div>
                     <div className="text-grey pt-2">
