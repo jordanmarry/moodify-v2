@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import Link from 'next/link';
+import { useRouter } from "next/router";
 import SongCard from "../components/SongCard";
 
 const Landing = () => {
-
+    const router = useRouter();
     const [topData, setTopData] = useState(null);
     const [currentCardIndex, setCurrentCardIndex] = useState(0)
 
@@ -33,34 +33,52 @@ const Landing = () => {
         }
     };
     
-    // Fetch data when the component mounts
-    useEffect(() => {
-        fetchTopData()
-    }, [topData])
-
     const handleNextCard = () => {
         if (topData && topData.length > 0) {
             setCurrentCardIndex((currentCardIndex + 1) % topData.length);
         }
     }
-    
+
     const handlePrevCard = () => {
         if (topData && topData.length > 0) {
             setCurrentCardIndex((currentCardIndex - 1 + topData.length) % topData.length);
         }
     }
 
+    const handleLogin = () => {
+        const clientId = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID
+        const redirectUri = `${window.location.origin}/callback`;
+        const scopes = ["user-read-private", "user-read-email", "playlist-read-private"]; 
+    
+        const loginUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(
+          redirectUri
+        )}&scope=${encodeURIComponent(scopes.join(" "))}&response_type=token`;
+    
+        window.location.href = loginUrl;
+      };
+
+    // Fetch data when the component mounts
+    useEffect(() => {
+        fetchTopData()
+    }, [topData])
+
     return (
         <div className="text-off-white flex items-center justify-between h-screen">
             <div className="text-left w-2/5">
-                <p className="text-5xl font-bold pb-6"> Express Your <span className="text-dark-blue">Mood</span> <br/> Through Music. </p>
-                <Link href='/login' title="login page" className=" text-xl text-off-white border border-dark-blue rounded-md px-12 py-2 bg-dark-blue hover:bg-off-white hover:text-dark-blue transition-all duration-500">
-                    Sign in
-                </Link>
+                <p className="text-5xl font-bold pb-6">
+                    Express Your <span className="text-dark-blue">Mood</span> <br/> Through Music. 
+                </p>
+
+                <button
+                    onClick={handleLogin}
+                    className="text-xl text-off-white border border-dark-blue rounded-md px-12 py-2 bg-dark-blue hover:bg-off-white hover:text-dark-blue transition-all duration-500"
+                    >
+                    Sign in with Spotify
+                </button>
             </div>
             {topData !== null && topData.length > 0 && (
                 <div className="w-2/5">
-                    <h1 className="text-2xl text-center font-bold pb-4 pt-8 text-off-white"> Today's Top 10 Hits By Spotify</h1>
+                    <h1 className="text-2xl text-center font-bold pb-4 pt-8 text-off-white"> Today&apos;s Top 10 Hits By Spotify</h1>
                     <div className="">
                         <SongCard
                             imgSrc={topData[currentCardIndex].albumCover}
