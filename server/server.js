@@ -130,10 +130,10 @@ app.post("/user", async (req, res) => {
     // using the API login, passed in info about user
     const {data} = req.body
 
-    console.log(data.id)
-
     var info = {id: data.id, display_name: data.display_name, friends: []}
 
+    // if the db has the id within, don't create a new userModel and return 
+    // the info. Else create a new UserModel and return the info still.
     UserModel.findOne({id: data.id})
     .then(async user => {
         if(user) {
