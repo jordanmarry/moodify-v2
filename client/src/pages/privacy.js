@@ -19,8 +19,8 @@ const Home = () => {
                 </p>
 
                 <p>
-                    Your email and first name will be stored for the app usability.
-                    The data is protected and encrypted, but if you want to remove
+                    Your user ID and display name will be stored for the app usability.
+                    The data is protected and encrypted, but if you have any questions about
                     your data contact INSERT EMAIL. 
                 </p>
             </div>
