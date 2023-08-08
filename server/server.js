@@ -132,7 +132,7 @@ app.post("/user", async (req, res) => {
 
     console.log(data.id)
 
-    var info = {id: data.id, display_name: data.display_name}
+    var info = {id: data.id, display_name: data.display_name, friends: []}
 
     UserModel.findOne({id: data.id})
     .then(async user => {
