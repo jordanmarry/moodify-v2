@@ -5,12 +5,21 @@ import {AiOutlineMenu, AiOutlineClose} from 'react-icons/ai'
 const Navbar = () => {
     const [scrolled, setScrolled] = useState(false)
     const [nav, setNav] = useState(false)
+    const [spotToken, setSpotToken] = useState(null)
 
     const handleNav = () => {
         setNav(!nav)
     }
 
     useEffect(() => {
+        const token = window.localStorage.getItem("token");
+
+        if (token === null){
+            setSpotToken(null)
+        } else {
+            setSpotToken(token)
+        }
+
         const handleScroll = () => {
           setScrolled(window.scrollY > 0);
         };
@@ -25,13 +34,20 @@ const Navbar = () => {
     return (
         <div className={`fixed left-0 top-0 w-full z-10 ease-in duration-300 pr-12 pl-16 pt-2 ${scrolled ? 'bg-light-blue' : 'bg-transparent'}`}>
             <div className='max-w-{1240px} m-auto flex justify-between items-center p-4 text-off-white'>
-                <Link href='/'>
-                    <h1 className='font-bold text-4xl text-off-white hover:text-pink transition-all duration-500'>moodify.</h1>
-                </Link>
+                {spotToken === null ? (
+                    <Link href='/'>
+                        <h1 className='font-bold text-4xl text-off-white hover:text-pink transition-all duration-500'>moodify.</h1>
+                    </Link>
+                ) : (
+                    <Link href='/home'>
+                        <h1 className='font-bold text-4xl text-off-white hover:text-pink transition-all duration-500'>moodify.</h1>
+                    </Link>
+                )}
+                
                 
                 <ul className='hidden sm:flex'>
                     <li className='p-4 text-lg hover:text-pink hover:cursor-pointer transition-all duration-500'>
-                        <Link href='/'> home </Link>
+                        {spotToken === null ? (<Link href='/'> home </Link> ) : (<Link href='/home'> home </Link> )}
                     </li>
                     <li className='p-4 text-lg hover:text-pink hover:cursor-pointer transition-all duration-500'>
                         <Link href='/about'> about </Link>

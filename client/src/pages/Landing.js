@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import Link from 'next/link'
 import SongCard from "../components/SongCard";
 
 const Landing = () => {
-    const [topData, setTopData] = useState(null);
+    const [topData, setTopData] = useState(null)
+    const [spotToken, setSpotToken] = useState(null)
     const [currentCardIndex, setCurrentCardIndex] = useState(0)
 
     function compare( a, b ) {
@@ -58,24 +60,39 @@ const Landing = () => {
     // Fetch data when the component mounts
     useEffect(() => {
         fetchTopData()
+
+        const token = window.localStorage.getItem("token");
+
+        if (token === null){
+            setSpotToken(null)
+        } else {
+            setSpotToken(token)
+        }
     }, [topData])
 
     return (
-        <div className="text-off-white flex items-center justify-between h-screen">
-            <div className="text-left w-2/5">
+        <div className="pt-24 md:pt-0 text-off-white sm:flex items-center justify-between h-full sm:h-screen">
+            <div className="text-center md:text-left md:w-2/5">
                 <p className="text-5xl font-bold pb-6">
                     Express Your <span className="text-dark-blue">Mood</span> <br/> Through Music. 
                 </p>
-
-                <button
-                    onClick={handleLogin}
-                    className="text-xl text-off-white border border-dark-blue rounded-md px-12 py-2 bg-dark-blue hover:bg-off-white hover:text-dark-blue transition-all duration-500"
-                    >
-                    Sign in with Spotify
-                </button>
+                {spotToken === null ? (
+                    <button
+                        onClick={handleLogin}
+                        className="text-xl text-off-white border border-dark-blue rounded-md px-12 py-2 bg-dark-blue hover:bg-off-white hover:text-dark-blue transition-all duration-500"
+                        >
+                        Sign in with Spotify
+                    </button>
+                ) : (
+                    <Link href='/home'
+                        className="text-xl text-off-white border border-dark-blue rounded-md px-12 py-2.5 bg-dark-blue hover:bg-off-white hover:text-dark-blue transition-all duration-500"
+                        >
+                        Go to Home
+                    </Link>
+                )}
             </div>
             {topData !== null && topData.length > 0 && (
-                <div className="w-2/5">
+                <div className="md:w-2/5 pt-5 pb-16 md:pb-0">
                     <h1 className="text-2xl text-center font-bold pb-4 pt-8 text-off-white"> Today&apos;s Top 10 Hits By Spotify</h1>
                     <div className="">
                         <SongCard
