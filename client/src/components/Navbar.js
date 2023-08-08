@@ -70,7 +70,7 @@ const Navbar = () => {
             'sm:hidden absolute top-0 left-[-100%] right-0 bottom-0 flex justify-center items-center w-full h-screen bg-black text-center ease-in duration-500'}>
                     <ul>
                         <li className='p-4 text-4xl hover:text-light-blue'>
-                            <Link onClick={handleNav} href='/'> Home </Link>
+                            {spotToken === null ? (<Link href='/'> home </Link> ) : (<Link href='/home'> home </Link> )}
                         </li>
                         <li className='p-4 text-4xl hover:text-light-blue'>
                             <Link onClick={handleNav} href='/about'> About </Link>
