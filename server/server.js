@@ -126,60 +126,21 @@ app.get("/", async (req, res) => {
     }
 })
 
-// Check login compared to database
-app.post("/login", (req, res) => {
+app.post("/user", async (req, res) => {
+    // using the API login, passed in info about user
+    const {data} = req.body
 
-    // retrieve given password and email
-    const {email, password} = req.body
+    console.log(data.id)
 
-    // clean the password and email 
-    var cleanEmail = sanitize(email)
-    var cleanPass = sanitize(password)
-    
-    // find if the user exists within the database
-    UserModel.findOne({email: cleanEmail})
+    var info = {id: data.id, display_name: data.display_name}
+
+    UserModel.findOne({id: data.id})
     .then(async user => {
         if(user) {
-            const pass = await bcrypt.compare(cleanPass, user.password)
-            // if passwords match return sucess
-            if (pass) {
-                res.json("Sucess")
-            } 
-            // if they don't, return password is incorrect
-            else {
-                res.json("Password is Incorrect")
-            }
-        
+            res.json(info)
         } else {
-            res.json("User Does Not Exist ")
-        }
-    })
-});
-
-// push the registered info to the database
-app.post("/register", async (req, res) => {
-
-    // retrieve the password, name, email of user
-    const {name, email, password} = req.body
-
-    // clean info given
-    var cleanName = sanitize(name)
-    var cleanEmail = sanitize(email)
-    var sanPass = sanitize(password)
-
-    var cleanPass = await bcrypt.hash(sanPass, 13)
-
-    var info = {name: cleanName, email: cleanEmail, password: cleanPass}
-
-    UserModel.findOne({email: cleanEmail})
-    .then(async user => {
-        if(user) {
-            res.json("User Already Exists.")
-        
-        } else {
-            // create the user and put them in the database
-            UserModel.create(info) 
-            .then(res.json("Registered Successfully"))
+            UserModel.create(info)
+            .then(res.json(info))
             .catch(err => res.json(err))
         }
     })
