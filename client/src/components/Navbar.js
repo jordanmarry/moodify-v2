@@ -66,20 +66,20 @@ const Navbar = () => {
                 </div>
 
                 {/* Mobile Menu */}
-                <div className={nav ? 'sm:hidden absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center w-full h-screen bg-black text-center ease-in duration-500' :
-            'sm:hidden absolute top-0 left-[-100%] right-0 bottom-0 flex justify-center items-center w-full h-screen bg-black text-center ease-in duration-500'}>
+                <div className={nav ? 'sm:hidden absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center w-full h-screen bg-light-blue text-center ease-in duration-500' :
+            'sm:hidden absolute top-0 left-[-100%] right-0 bottom-0 flex justify-center items-center w-full h-screen bg-light-blue text-center ease-in duration-500'}>
                     <ul>
-                        <li className='p-4 text-4xl hover:text-light-blue'>
+                        <li className='p-4 text-4xl hover:text-pink'>
                             {spotToken === null ? (<Link href='/'> home </Link> ) : (<Link href='/home'> home </Link> )}
                         </li>
-                        <li className='p-4 text-4xl hover:text-light-blue'>
-                            <Link onClick={handleNav} href='/about'> About </Link>
+                        <li className='p-4 text-4xl hover:text-pink'>
+                            <Link onClick={handleNav} href='/about'> about </Link>
                         </li>
-                        <li className='p-4 text-4xl hover:text-light-blue'>
-                            <Link onClick={handleNav} href='/privacy'> Privacy Policy </Link>
+                        <li className='p-4 text-4xl hover:text-pink'>
+                            <Link onClick={handleNav} href='/privacy'> privacy policy </Link>
                         </li>
-                        <li className='p-4 text-4xl hover:text-light-blue'>
-                            <Link onClick={handleNav} href='/contact'> Contact </Link>
+                        <li className='p-4 text-4xl hover:text-pink'>
+                            <Link onClick={handleNav} href='/contact'> contact </Link>
                         </li>
                     </ul>
                 </div>
