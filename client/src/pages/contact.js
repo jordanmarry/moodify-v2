@@ -1,6 +1,8 @@
 import React from "react";
 import Head from 'next/head';
 
+// Simple contact page
+
 const Home = () => {
     return (
         <div className='h-screen items-center flex justify-center mt-16 sm:mt-0'>

@@ -33,18 +33,21 @@ const Landing = () => {
         }
     };
     
+    // Button to change to the next song card on the landing page
     const handleNextCard = () => {
         if (topData && topData.length > 0) {
             setCurrentCardIndex((currentCardIndex + 1) % topData.length);
         }
     }
 
+    // Button to change to the previous song card on the landing page
     const handlePrevCard = () => {
         if (topData && topData.length > 0) {
             setCurrentCardIndex((currentCardIndex - 1 + topData.length) % topData.length);
         }
     }
 
+    // The user will login into Spotify API with specific scopes to access data.
     const handleLogin = () => {
         const clientId = process.env.NEXT_PUBLIC_SPOTIFY_CLIENT_ID
         const redirectUri = `${window.location.origin}/callback`;
@@ -59,8 +62,10 @@ const Landing = () => {
 
     // Fetch data when the component mounts
     useEffect(() => {
+        // Getting the top 10 songs from the database
         fetchTopData()
 
+        // retrieving the token from local storage
         const token = window.localStorage.getItem("token");
 
         if (token === null){

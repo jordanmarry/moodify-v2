@@ -1,6 +1,8 @@
 import React from "react";
 import Head from 'next/head';
 
+// About Page for moodify.
+
 const Home = () => {
     return (
         <div className='h-screen items-center flex justify-center pt-10 sm:pt-0'>
