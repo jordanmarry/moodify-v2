@@ -40,13 +40,12 @@ const Callback = () => {
         }
       })
 
+      window.localStorage.setItem("displayName", data.display_name)
+      window.localStorage.setItem("userId", data.id)
+
       // Posting the data to /user for the backend to then push this into DB
       const url = "http://localhost:5050/user"
       axios.post(url, {data})
-      .then(result => {
-        // setting the display name in local storage
-        window.localStorage.setItem("displayName", result.data.display_name)
-      })
 
     } catch (error) {
       console.error('Error while retrieving profile info', error)
