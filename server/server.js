@@ -113,7 +113,7 @@ const topTenSongs = async () => {
 
 // // Calls top 10 songs function when 12 PM passes
 // cron.schedule('0 12 * * *', () => {
-//     scrapePlaylist();
+//     topTenSongs();
 // });
 
 app.get("/", async (req, res) => {
@@ -122,7 +122,7 @@ app.get("/", async (req, res) => {
         const songs = await SongsModel.find({});
         res.json(songs);
     } catch (err) {
-        res.json('Error Retreiving Data');
+        res.json('Error Retrieving Data');
     }
 })
 
@@ -145,6 +145,17 @@ app.post("/user", async (req, res) => {
         }
     })
 });
+
+app.get("/user/:userId", async (req, res) => {
+    try {
+        // Fetch data using the provided userId
+        const userId = req.params.userId;
+        const data = await UserModel.find({ id: userId })
+        res.json(data)
+    } catch (err) {
+        res.json('Error Retrieving User Info')
+    }
+})
 
 app.listen(5050, () => {
     console.log('Server is running')
