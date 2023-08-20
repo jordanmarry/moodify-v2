@@ -44,19 +44,21 @@ const Home = () => {
     }, []);
 
     return (
-        <div className='pt-24 h-screen'>
+        <div className='pt-32 lg:pt-0 h-full lg:h-screen flex flex-col justify-center items-center'>
             <Head>
                 <title>Moodify | Home </title>
             </Head>
-            <div className='pt-16'>
-                <div className="text-3xl text-off-white font-bold pb-12">
-                    Hey! How are we feeling <span className='text-dark-blue'>{nameToken}</span>?
-                </div>
 
-                <div className='lg:flex items-center justify-between'>
+            <div className="text-3xl text-off-white font-bold">
+                Hey! How are we feeling <span className='text-dark-blue'>{nameToken}</span>?
+            </div>
+
+            <div className='pt-16 text-center lg:text-left'>
+                <div className='lg:flex items-center justify-between text-center gap-32 md:gap-64'>
                     <div className='text-off-white font-bold text-xl pb-8 lg:pb-0'>
                         Your song for the day:
                         {data && data.trackId === "" ? (
+                            // Default Song
                             <div className='pt-4'>
                                 <button onClick={handleSong}>
                                     <SongCard
@@ -68,25 +70,38 @@ const Home = () => {
                                         albumLink={""}
                                     />
                                 </button>
-                        </div>
+                            </div>
                         ) : (
+                            // Chosen Song
                             <div className='pt-4'>
-                            <SongCard
-                                imgSrc={"/images/default-song.png"}
-                                song={""}
-                                songLink={""}
-                                artistList={""}
-                                album={""}
-                                albumLink={""}
-                            />
-                        </div>
+                                <SongCard
+                                    imgSrc={"/images/default-song.png"}
+                                    song={""}
+                                    songLink={""}
+                                    artistList={""}
+                                    album={""}
+                                    albumLink={""}
+                                />
+                                
+                                <button 
+                                    onClick={handleSong} 
+                                    className="text-xl text-off-white border 
+                                        border-dark-blue rounded-md px-12 py-2 
+                                        bg-dark-blue hover:bg-off-white 
+                                        hover:text-dark-blue transition-all 
+                                        duration-500">
+                                    
+                                    Change Your Song Mood
+
+                                </button>
+                            </div>
                         )}
                     </div>
                     <div className='text-off-white font-bold text-xl pb-8 lg:pb-0'>
-                        Friends List
+                            Friends List
                     </div>
                     <div className='text-off-white font-bold text-xl'>
-                        Top 10 Songs From Moodify Users
+                            Top 10 Songs From Moodify Users
                     </div>
                 </div>
             </div>
