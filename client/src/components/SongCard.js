@@ -9,9 +9,14 @@ const SongCard = ({ imgSrc, song, songLink, artistList,
             <div className="border border-off-white bg-off-white">
                 <div className="p-4">
                     <div className="">
-                        <a href={songLink}>
+                        {imgSrc === "/images/default-song.png" ? (
                             <Image src={imgSrc} alt="Album cover" priority={true} width={300} height={300} className=""/>
-                        </a>
+                        ) : (
+                            <a href={songLink}>
+                                <Image src={imgSrc} alt="Album cover" priority={true} width={300} height={300} className=""/>
+                            </a>
+                        )}
+                        
                     </div>
                     <div className="text-grey pt-2">
                         <div>  
