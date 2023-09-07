@@ -10,7 +10,7 @@ const SongCard = ({ imgSrc, song, songLink, artistList,
                 <div className="p-4">
                     <div className="">
                         {imgSrc === "/images/default-song.png" ? (
-                            <Image src={imgSrc} alt="Album cover" priority={true} width={300} height={300} className=""/>
+                            <Image src={imgSrc} alt="Album cover" priority={true} width={300} height={300} className="pb-20"/>
                         ) : (
                             <a href={songLink}>
                                 <Image src={imgSrc} alt="Album cover" priority={true} width={300} height={300} className=""/>
