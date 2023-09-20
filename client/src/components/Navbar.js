@@ -12,7 +12,7 @@ const Navbar = () => {
     }
 
     useEffect(() => {
-        const token = window.localStorage.getItem("token");
+        const token = window.localStorage.getItem("access_token");
 
         if (token === null){
             setSpotToken(null)

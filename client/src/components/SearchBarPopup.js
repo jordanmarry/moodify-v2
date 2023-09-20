@@ -19,7 +19,7 @@ const SearchBarPopup = () => {
         try {
             const response = await axios.get(`https://api.spotify.com/v1/search?q=${searchQuery}&type=track&limit=3&offset=0`, {
                 headers: {
-                    Authorization: `Bearer ${window.localStorage.getItem("token")}`
+                    Authorization: `Bearer ${window.localStorage.getItem("access_token")}`
                 }
             });
 
@@ -66,14 +66,16 @@ const SearchBarPopup = () => {
                                 <ul>
                                     {searchResults.map((track) => (
                                         <li key={track.id}>
-                                            <SongCardSearch 
-                                                imgSrc={track.album.images[2].url}
-                                                song={track.name}
-                                                songLink={track.external_urls.spotify}
-                                                artistList={track.artists}
-                                                album={track.album.name}
-                                                albumLink={track.album.external_urls.spotify}
-                                            />
+                                            <button>
+                                                <SongCardSearch 
+                                                    imgSrc={track.album.images[2].url}
+                                                    song={track.name}
+                                                    songLink={track.external_urls.spotify}
+                                                    artistList={track.artists}
+                                                    album={track.album.name}
+                                                    albumLink={track.album.external_urls.spotify}
+                                                />
+                                            </button>
                                         </li>
                                     ))}
                                 </ul>
