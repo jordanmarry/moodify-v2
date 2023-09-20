@@ -131,7 +131,8 @@ app.post("/user", async (req, res) => {
     
     const data = req.body
 
-    var info = {id: data.id, display_name: data.display_name, friends: [], trackId: ""}
+    var info = {id: data.id, display_name: data.display_name, friends: [], 
+        album: "", albumCover: "", albumLink: "", artistLink: [], song: "", songLink: ""}
 
     // if the db has the id within, don't create a new userModel and return 
     // the info. Else create a new UserModel and return the info still.
@@ -152,7 +153,8 @@ app.get("/user/:userId", async (req, res) => {
         // Fetch data using the provided userId
         const userId = req.params.userId;
         const data = await UserModel.find({ id: userId })
-        res.json(data)
+        console.log(data)
+        res.json(data) 
     } catch (err) {
         res.json('Error Retrieving User Info')
     }
@@ -161,3 +163,27 @@ app.get("/user/:userId", async (req, res) => {
 app.listen(5050, () => {
     console.log('Server is running')
 });
+
+app.post("/userSong", async (req, res) => {
+    const data = req.body
+
+    UserModel.findOne({id: data.userID})
+    .then(async user => {
+        if (user) {
+            
+            user.album = data.albumName
+            user.albumCover = data.albumCover
+            user.albumLink = data.albumLink
+            user.artistList = data.artistList
+            user.song = data.songName
+            user.songLink =data.songLink
+
+            // Save the updated user object
+            await user.save();
+
+            res.status(200).send("Song data added to the user.");
+        } else {
+            res.status(404).send("User not found.");
+        }
+    })
+})

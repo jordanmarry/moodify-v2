@@ -6,6 +6,9 @@ const SearchBarPopup = () => {
     const [isPopupOpen, setIsPopupOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
     const [searchResults, setSearchResults] = useState([]);
+    const [selectedSongIndex, setselectedSongIndex] = useState(null);
+    const [selectedSong, setselectedSong] = useState(null);
+
 
     const openPopup = () => {
         setIsPopupOpen(true);
@@ -13,23 +16,54 @@ const SearchBarPopup = () => {
 
     const closePopup = () => {
         setIsPopupOpen(false);
+        setselectedSongIndex(null)
+        setSearchResults([]);
     };
 
     const handleSearch = async () => {
+        setselectedSongIndex(null)
         try {
             const response = await axios.get(`https://api.spotify.com/v1/search?q=${searchQuery}&type=track&limit=3&offset=0`, {
                 headers: {
-                    Authorization: `Bearer ${window.localStorage.getItem("token")}`
+                    Authorization: `Bearer ${window.localStorage.getItem("access_token")}`
                 }
             });
 
-            const top5Results = response.data.tracks.items.slice(0, 5);
-            setSearchResults(top5Results);
+            const top3Results = response.data.tracks.items;
+            setSearchResults(top3Results);
 
-            console.log(top5Results[0].artists)
         } catch (error) {
             console.error('Error searching for tracks:', error);
         }
+    };
+
+    const handleSongSelect = (index, track) => {
+        setselectedSongIndex(index);
+        setselectedSong(track);
+    };
+
+    const handleConfirm = (track) => {
+        const url = "http://localhost:5050/userSong"
+        // albumName
+        const albumName = track.album.name
+        // albumCover
+        const albumCover = track.album.images[0].url
+        // albumLink
+        const albumLink = track.album.external_urls.spotify
+        // artistList
+        const artistList = track.artists.map(artist => ({
+            artist: artist.name,
+            artistLink: artist.external_urls.spotify
+        }))
+        // songName
+        const songName = track.name
+        // songLink
+        const songLink = track.external_urls.spotify
+        // userID
+        const userID = window.localStorage.getItem("userId")
+        axios.post(url, {userID, albumName, albumCover, albumLink, artistList, songName, songLink})
+        closePopup();
+        location.reload()
     };
 
     return (
@@ -53,30 +87,47 @@ const SearchBarPopup = () => {
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                         />
-                        <button 
+                        {searchResults.length === 0 && (
+                            <button 
                             className="bg-dark-blue text-white rounded-md p-2 mt-2"
                             onClick={handleSearch}
-                        >
-                            Search
-                        </button>
+                            >
+                                Search
+                            </button>
+                        )}
+                        
 
                         {searchResults.length > 0 && (
                             <div>
                                 <h2 className="text-dark-blue font-bold text-2xl pt-4 pb-4 underline">Search Results:</h2>
                                 <ul>
-                                    {searchResults.map((track) => (
+                                    {searchResults.map((track, index) => (
                                         <li key={track.id}>
-                                            <SongCardSearch 
-                                                imgSrc={track.album.images[2].url}
-                                                song={track.name}
-                                                songLink={track.external_urls.spotify}
-                                                artistList={track.artists}
-                                                album={track.album.name}
-                                                albumLink={track.album.external_urls.spotify}
-                                            />
+                                            <button onClick={() => handleSongSelect(index, track)}>
+                                                <SongCardSearch 
+                                                    imgSrc={track.album.images[2].url}
+                                                    song={track.name}
+                                                    songLink={track.external_urls.spotify}
+                                                    artistList={track.artists}
+                                                    album={track.album.name}
+                                                    albumLink={track.album.external_urls.spotify}
+                                                    isSelected={selectedSongIndex === index}
+                                                />
+                                            </button>
                                         </li>
                                     ))}
                                 </ul>
+                                <button 
+                                    className="bg-dark-blue text-white rounded-md p-2 mt-2"
+                                    onClick={handleSearch}
+                                    >
+                                        Search
+                                </button>
+                                {selectedSongIndex !== null && (
+                                    <button className="bg-dark-blue text-white rounded-md p-2 mt-2 ml-4" onClick={() => handleConfirm(selectedSong)}>
+                                        Confirm
+                                    </button>
+                                )}
                             </div>
                         )}
                     </div>
