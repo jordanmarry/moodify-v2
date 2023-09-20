@@ -7,31 +7,26 @@ const Home = () => {
 
     const [nameToken, setNameToken] = useState(null)
     const [data, setData] = useState(null);
-    const [isPopupOpen, setPopupOpen] = useState(false);
-
-    const openPopup = () => {
-        setPopupOpen(true);
-    };
-
-    const closePopup = () => {
-        setPopupOpen(false);
-    };
 
     useEffect(() => {
         const name = window.localStorage.getItem("displayName");
         const userId = window.localStorage.getItem("userId");
 
-        if (name === null){
-            setNameToken(null)
-        } else {
-            const first_name = name.split(" ")[0]
-            setNameToken(first_name)
-        }
-
         const retreiveAccount = async () => {
             try {
+                if (name === null){
+                    setNameToken(null)
+                } else {
+                    const first_name = name.split(" ")[0]
+                    setNameToken(first_name)
+                }
+
                 const response = await fetch(`http://localhost:5050/user/${userId}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
                 const jsonData = await response.json();
+                console.log('jsonData:', jsonData);
                 setData(jsonData[0]);
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -40,9 +35,11 @@ const Home = () => {
 
         if (userId !== null) {
             retreiveAccount()
+            
         }
-
     }, []);
+
+    console.log(data)
 
     return (
         <div className='pt-32 lg:pt-0 h-full lg:h-screen flex flex-col justify-center items-center'>
@@ -58,7 +55,7 @@ const Home = () => {
                 <div className='lg:flex items-center justify-between text-center gap-32 md:gap-64'>
                     <div className='text-off-white font-bold text-xl pb-8 lg:pb-0'>
                         Your song for the day:
-                        {data && data.trackId === "" ? (
+                        {data === null ? (
                             // Default Song
                             <div className='pt-4'>
                                 <div className='pb-4'>
@@ -80,12 +77,12 @@ const Home = () => {
                             <div className='pt-4'>
                                 <div className='pb-4'> 
                                     <SongCard
-                                        imgSrc={"/images/default-song.png"}
-                                        song={""}
-                                        songLink={""}
-                                        artistList={""}
-                                        album={""}
-                                        albumLink={""}
+                                        imgSrc={data.albumCover}
+                                        song={data.song}
+                                        songLink={data.songLink}
+                                        artistList={data.artistList}
+                                        album={data.album}
+                                        albumLink={data.albumLink}
                                     />
                                 </div>
                                 <div>

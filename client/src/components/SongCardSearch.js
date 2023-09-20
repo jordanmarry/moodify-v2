@@ -1,11 +1,14 @@
 import React, { useEffect } from "react";
 import Image from "next/image";
 
-const SongCardSearch = ({ imgSrc, song, 
-    artistList, album }) => {
+const SongCardSearch = ({ imgSrc, song, artistList, album, isSelected, onClick }) => {
+
+        const cardClasses = `flex flex-row text-dark-blue p-2 rounded-md ${
+                isSelected ? "bg-dark-blue text-off-white" : "hover:bg-dark-blue hover:text-off-white"
+            }`;
 
         return (
-            <div className="flex flex-row text-dark-blue p-2 hover:bg-dark-blue hover:text-off-white rounded-md">
+            <div className={cardClasses} onClick={onClick}>
                 <div>
                     <Image src={imgSrc} alt="Album Cover" priority={true} width={80} height={80} className=""/>
                 </div>
