@@ -55,7 +55,7 @@ const Landing = () => {
     
         const loginUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&redirect_uri=${encodeURIComponent(
           redirectUri
-        )}&scope=${encodeURIComponent(scopes.join(" "))}&response_type=token`;
+        )}&scope=${encodeURIComponent(scopes.join(" "))}&response_type=code`;
     
         window.location.href = loginUrl;
       };
@@ -66,7 +66,7 @@ const Landing = () => {
         fetchTopData()
 
         // retrieving the token from local storage
-        const token = window.localStorage.getItem("token");
+        const token = window.localStorage.getItem("access_token");
 
         if (token === null){
             setSpotToken(null)

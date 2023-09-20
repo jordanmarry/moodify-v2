@@ -128,7 +128,8 @@ app.get("/", async (req, res) => {
 
 app.post("/user", async (req, res) => {
     // using the API login, passed in info about user
-    const {data} = req.body
+    
+    const data = req.body
 
     var info = {id: data.id, display_name: data.display_name, friends: [], trackId: ""}
 

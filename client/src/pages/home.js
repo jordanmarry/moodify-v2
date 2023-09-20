@@ -3,10 +3,6 @@ import React, { useState, useEffect } from 'react';
 import SongCard from "../components/SongCard";
 import SearchBarPopup from '../components/SearchBarPopup';
 import FriendsList from "../components/FriendsList";
-
-
-// simple home page
-
 const Home = () => {
 
     const [nameToken, setNameToken] = useState(null)
