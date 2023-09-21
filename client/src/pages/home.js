@@ -11,6 +11,10 @@ const Home = () => {
     useEffect(() => {
         const name = window.localStorage.getItem("displayName");
         const userId = window.localStorage.getItem("userId");
+        
+        if (userId == null) {
+            window.location.href = '/'
+        }
 
         const retreiveAccount = async () => {
             try {
