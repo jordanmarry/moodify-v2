@@ -81,7 +81,7 @@ const Landing = () => {
                 <p className="text-5xl font-bold pb-6">
                     Express Your <span className="text-dark-blue">Mood</span> <br/> Through Music. 
                 </p>
-                {spotToken === null ? (
+                {spotToken === null || spotToken === "undefined" ? (
                     <button
                         onClick={handleLogin}
                         className="text-xl text-off-white border border-dark-blue rounded-md px-12 py-2 bg-dark-blue hover:bg-off-white hover:text-dark-blue transition-all duration-500"
