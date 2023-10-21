@@ -37,7 +37,7 @@ const FriendsList = ({ friendsList }) => {
     return (
         <div>
             <button className="bg-dark-blue text-off-white px-4 py-2 rounded-md" onClick={openPopup}>
-                Add a Friend
+                Follow People
             </button>
             {isPopupOpen && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-40">
@@ -65,7 +65,7 @@ const FriendsList = ({ friendsList }) => {
                             className="bg-dark-blue text-white rounded-md p-2 mt-2"
                             onClick={() => handleAddFriend(friendQuery)}
                             >
-                                Add Friend
+                                Follow
                             </button>
                         </div>
                         {noneUser === true && (

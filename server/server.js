@@ -169,7 +169,15 @@ app.post("/addFriend/:friendId", async (req, res) => {
             UserModel.findOne({id: data.friendID})
             .then(async friend => {
                 if (friend) {
-                    user.friends.push({id: friend.id, display_name: friend.display_name, photo: friend.photo})
+                    user.friends.push({
+                        id: friend.id, 
+                        display_name: friend.display_name, 
+                        photo: friend.photo, 
+                        ablumCover: friend.albumCover, 
+                        album: friend.album,
+                        song: friend.song, 
+                        artistList: friend.artistList, 
+                        })
                     await user.save();
                     res.status(200).send("Song data added to the user.");
                 } else {

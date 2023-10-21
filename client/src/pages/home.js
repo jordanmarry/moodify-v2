@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import SongCard from "../components/SongCard";
 import SearchBarPopup from '../components/SearchBarPopup';
 import FriendsList from "../components/FriendsListPopup";
+import FriendCard from '@/components/FriendCard';
 
 const Home = () => {
 
@@ -108,12 +109,24 @@ const Home = () => {
                     </div>
                     <div className='text-off-white font-bold text-xl pb-8 lg:pb-0'>
                             <div className='pb-2'>
-                                Friends List
+                                Following List
                             </div>
-                            {data.friends !== null && (
-                                <div>
-                                    {/* Add friends list here */}
-                                    HI
+                            {data === null ? (
+                                <div >
+                                </div>
+                            ) : (
+                                <div className='pb-4'>
+                                    {/* Make it show list of 10 friends and then next page*/}
+                                    {data.friends.map((friend, index) => (
+                                        <FriendCard 
+                                            displayName={friend.display_name}
+                                            imgSrc={friend.photo}
+                                            albumName={friend.album}
+                                            songName={friend.song}
+                                            artistList={friend.artistList}
+                                        />
+                                    ))}
+                                    
                                 </div>
                             )}
                             
