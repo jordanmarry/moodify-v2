@@ -41,14 +41,16 @@ const Callback = () => {
           method: "GET", headers: { Authorization: `Bearer ${access_token}` }
         });
 
-        const {display_name, id} = await profile.json();
-        console.log(display_name, id)
+        const {display_name, id, images} = await profile.json();
+        const profilePhoto = images[1].url
+        console.log(display_name, id, profilePhoto)
+        
         window.localStorage.setItem("displayName", display_name)
         window.localStorage.setItem("userId", id) 
 
         // Posting the data to /user for the backend to then push this into DB
         const url = "http://localhost:5050/user"
-        axios.post(url, {display_name, id})
+        axios.post(url, {display_name, id, profilePhoto})
 
         // Moves the User to the Home Page
         window.location.href = '/home'

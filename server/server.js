@@ -131,7 +131,7 @@ app.post("/user", async (req, res) => {
     
     const data = req.body
 
-    var info = {id: data.id, display_name: data.display_name, friends: [], 
+    var info = {id: data.id, display_name: data.display_name, photo: data.profilePhoto, friends: [], 
         album: "", albumCover: "", albumLink: "", artistLink: [], song: "", songLink: ""}
 
     // if the db has the id within, don't create a new userModel and return 
