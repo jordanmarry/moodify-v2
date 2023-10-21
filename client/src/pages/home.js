@@ -57,18 +57,18 @@ const Home = () => {
     }, []);
 
     return (
-        <div className='pt-32 lg:pt-0 h-full lg:h-screen flex flex-col justify-center items-center'>
+        <div className='pt-32 lg:pt-0 h-full xl:h-screen flex flex-col justify-center items-center'>
             <Head>
                 <title>Moodify | Home </title>
             </Head>
 
-            <div className="text-3xl text-off-white font-bold pt-16">
+            <div className="text-3xl text-off-white font-bold lg:pt-32">
                 Hey! How are we feeling <span className='text-dark-blue'>{nameToken}</span>?
             </div>
 
             <div className='pt-8 text-center lg:text-left'>
-                <div className='lg:flex items-center justify-between text-center gap-32 md:gap-64'>
-                    <div className='text-off-white font-bold text-xl pb-8 lg:pb-0'>
+                <div className='xl:flex items-center justify-between text-center gap-32 lg:gap-48'>
+                    <div className='text-off-white font-bold text-xl pb-24 xl:pb-32'>
                         Your song for the day:
                         {data === null ? (
                             // Default Song
@@ -107,7 +107,7 @@ const Home = () => {
                             </div>
                         )}
                     </div>
-                    <div className='text-off-white font-bold text-xl pb-8 lg:pb-0'>
+                    <div className='text-off-white font-bold text-xl pb-24 xl:pb-32'>
                             <div className='pb-2'>
                                 Following List
                             </div>
@@ -133,7 +133,7 @@ const Home = () => {
                             <FriendsList />
 
                     </div>
-                    <div className='text-off-white font-bold text-xl'>
+                    <div className='text-off-white font-bold text-xl pb-24 xl:pb-32'>
                             Top 10 Songs From Moodify Users
                     </div>
                 </div>
