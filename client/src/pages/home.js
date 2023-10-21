@@ -68,8 +68,8 @@ const Home = () => {
 
             <div className='pt-8 text-center lg:text-left'>
                 <div className='xl:flex items-center justify-between text-center gap-32 lg:gap-48'>
-                    <div className='text-off-white text-xl pb-24 xl:pb-32'>
-                        <div className='font-bold'>
+                    <div className='text-off-white text-lg pb-24 xl:pb-32'>
+                        <div className='font-bold text-2xl'>
                             Your song for the day:
                         </div>
                         {data === null ? (
@@ -109,10 +109,14 @@ const Home = () => {
                             </div>
                         )}
                     </div>
-                    <div className='text-off-white font-bold text-xl pb-24 xl:pb-32'>
-                            <div className='pb-2'>
+                    <div className='text-off-white text-lg pb-24 xl:pb-32'>
+                            <div className='pb-2 text-2xl font-bold'>
                                 Following List
                             </div>
+                            <div className='pb-2'>
+                                <FriendsList />
+                            </div>
+
                             {data === null ? (
                                 <div >
                                 </div>
@@ -131,12 +135,10 @@ const Home = () => {
                                     
                                 </div>
                             )}
-                            
-                            <FriendsList />
 
                     </div>
-                    <div className='text-off-white font-bold text-xl pb-24 xl:pb-32'>
-                            Top 10 Songs From Moodify Users
+                    <div className='text-off-white font-bold text-2xl pb-24 xl:pb-32'>
+                            Top 10 Moodify Songs
                     </div>
                 </div>
             </div>
