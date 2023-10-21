@@ -2,11 +2,14 @@ import Head from 'next/head';
 import React, { useState, useEffect } from 'react';
 import SongCard from "../components/SongCard";
 import SearchBarPopup from '../components/SearchBarPopup';
-import FriendsList from "../components/FriendsList";
+import FriendsList from "../components/FriendsListPopup";
+
 const Home = () => {
 
     const [nameToken, setNameToken] = useState(null)
     const [data, setData] = useState(null);
+    const [topData, setTopData] = useState(null);
+
 
     useEffect(() => {
         const name = window.localStorage.getItem("displayName");
@@ -37,13 +40,20 @@ const Home = () => {
             }
         }
 
-        if (userId !== null) {
-            retreiveAccount()
-            
+        const retreiveTopSongs = async () => {
+            try {
+                
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
         }
-    }, []);
 
-    console.log(data)
+        if (userId !== null) {
+            retreiveAccount()   
+        }
+
+        retreiveTopSongs()
+    }, []);
 
     return (
         <div className='pt-32 lg:pt-0 h-full lg:h-screen flex flex-col justify-center items-center'>
@@ -97,7 +107,18 @@ const Home = () => {
                         )}
                     </div>
                     <div className='text-off-white font-bold text-xl pb-8 lg:pb-0'>
-                            Friends List
+                            <div className='pb-2'>
+                                Friends List
+                            </div>
+                            {data.friends !== null && (
+                                <div>
+                                    {/* Add friends list here */}
+                                    HI
+                                </div>
+                            )}
+                            
+                            <FriendsList />
+
                     </div>
                     <div className='text-off-white font-bold text-xl'>
                             Top 10 Songs From Moodify Users

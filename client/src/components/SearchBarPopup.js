@@ -18,6 +18,7 @@ const SearchBarPopup = () => {
         setIsPopupOpen(false);
         setselectedSongIndex(null)
         setSearchResults([]);
+        setSearchQuery('');
     };
 
     const handleSearch = async () => {

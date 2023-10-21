@@ -153,16 +153,35 @@ app.get("/user/:userId", async (req, res) => {
         // Fetch data using the provided userId
         const userId = req.params.userId;
         const data = await UserModel.find({ id: userId })
-        console.log(data)
         res.json(data) 
     } catch (err) {
         res.json('Error Retrieving User Info')
     }
 })
 
-app.listen(5050, () => {
-    console.log('Server is running')
-});
+// Used to add friends to friends list
+app.post("/addFriend/:friendId", async (req, res) => {
+    const data = req.body
+    UserModel.findOne({id: data.userID})
+    .then(async user => {
+        if (user) {
+            
+            UserModel.findOne({id: data.friendID})
+            .then(async friend => {
+                if (friend) {
+                    user.friends.push({id: friend.id, display_name: friend.display_name, photo: friend.photo})
+                    await user.save();
+                    res.status(200).send("Song data added to the user.");
+                } else {
+                    res.status(404).send("Friend not found.");
+                }
+            })
+            
+        } else {
+            res.status(404).send("User not found.");
+        }
+    })
+})
 
 app.post("/userSong", async (req, res) => {
     const data = req.body
@@ -187,3 +206,7 @@ app.post("/userSong", async (req, res) => {
         }
     })
 })
+
+app.listen(5050, () => {
+    console.log('Server is running')
+});
