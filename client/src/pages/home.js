@@ -2,11 +2,15 @@ import Head from 'next/head';
 import React, { useState, useEffect } from 'react';
 import SongCard from "../components/SongCard";
 import SearchBarPopup from '../components/SearchBarPopup';
-import FriendsList from "../components/FriendsList";
+import FriendsList from "../components/FriendsListPopup";
+import FriendCard from '@/components/FriendCard';
+
 const Home = () => {
 
     const [nameToken, setNameToken] = useState(null)
     const [data, setData] = useState(null);
+    const [topData, setTopData] = useState(null);
+
 
     useEffect(() => {
         const name = window.localStorage.getItem("displayName");
@@ -37,28 +41,37 @@ const Home = () => {
             }
         }
 
-        if (userId !== null) {
-            retreiveAccount()
-            
+        const retreiveTopSongs = async () => {
+            try {
+                
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
         }
+
+        if (userId !== null) {
+            retreiveAccount()   
+        }
+
+        retreiveTopSongs()
     }, []);
 
-    console.log(data)
-
     return (
-        <div className='pt-32 lg:pt-0 h-full lg:h-screen flex flex-col justify-center items-center'>
+        <div className='pt-32 lg:pt-0 h-full xl:h-screen flex flex-col justify-center items-center'>
             <Head>
                 <title>Moodify | Home </title>
             </Head>
 
-            <div className="text-3xl text-off-white font-bold pt-16">
+            <div className="text-3xl text-off-white font-bold lg:pt-32">
                 Hey! How are we feeling <span className='text-dark-blue'>{nameToken}</span>?
             </div>
 
             <div className='pt-8 text-center lg:text-left'>
-                <div className='lg:flex items-center justify-between text-center gap-32 md:gap-64'>
-                    <div className='text-off-white font-bold text-xl pb-8 lg:pb-0'>
-                        Your song for the day:
+                <div className='xl:flex items-center justify-between text-center gap-32 lg:gap-48'>
+                    <div className='text-off-white text-lg pb-24 xl:pb-32'>
+                        <div className='font-bold text-2xl'>
+                            Your song for the day:
+                        </div>
                         {data === null ? (
                             // Default Song
                             <div className='pt-4'>
@@ -96,11 +109,39 @@ const Home = () => {
                             </div>
                         )}
                     </div>
-                    <div className='text-off-white font-bold text-xl pb-8 lg:pb-0'>
-                            Friends List
+                    <div className='text-off-white text-lg pb-24 xl:pb-32'>
+                            <div className='pb-2 text-2xl font-bold'>
+                                Following List
+                            </div>
+                            <div className='pb-2'>
+                                <FriendsList />
+                            </div>
+
+                            {data === null ? (
+                                <div >
+                                </div>
+                            ) : (
+                                <div style={{ maxHeight: '500px', overflowY: 'auto' }}>
+                                    <div className='pb-4'>
+                                        {/* Make it show list of 10 friends and then next page*/}
+                                        {data.friends.map((friend, index) => (
+                                            <FriendCard 
+                                                displayName={friend.display_name}
+                                                imgSrc={friend.photo}
+                                                albumName={friend.album}
+                                                songName={friend.song}
+                                                artistList={friend.artistList}
+                                                id={friend.id}
+                                            />
+                                        ))}
+                                        
+                                    </div>
+                                </div>
+                            )}
+
                     </div>
-                    <div className='text-off-white font-bold text-xl'>
-                            Top 10 Songs From Moodify Users
+                    <div className='text-off-white font-bold text-2xl pb-24 xl:pb-32'>
+                            Top 10 Moodify Songs
                     </div>
                 </div>
             </div>

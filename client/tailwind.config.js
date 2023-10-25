@@ -31,6 +31,7 @@ module.exports = {
         'pink': '#DF9BD8',
         'off-white': '#EEEEEE',
         'grey': '#222629',
+        'red': '#FF0000'
       },
     },
   },
