@@ -121,18 +121,21 @@ const Home = () => {
                                 <div >
                                 </div>
                             ) : (
-                                <div className='pb-4'>
-                                    {/* Make it show list of 10 friends and then next page*/}
-                                    {data.friends.map((friend, index) => (
-                                        <FriendCard 
-                                            displayName={friend.display_name}
-                                            imgSrc={friend.photo}
-                                            albumName={friend.album}
-                                            songName={friend.song}
-                                            artistList={friend.artistList}
-                                        />
-                                    ))}
-                                    
+                                <div style={{ maxHeight: '500px', overflowY: 'auto' }}>
+                                    <div className='pb-4'>
+                                        {/* Make it show list of 10 friends and then next page*/}
+                                        {data.friends.map((friend, index) => (
+                                            <FriendCard 
+                                                displayName={friend.display_name}
+                                                imgSrc={friend.photo}
+                                                albumName={friend.album}
+                                                songName={friend.song}
+                                                artistList={friend.artistList}
+                                                id={friend.id}
+                                            />
+                                        ))}
+                                        
+                                    </div>
                                 </div>
                             )}
 

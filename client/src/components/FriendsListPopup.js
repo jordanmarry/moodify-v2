@@ -22,14 +22,14 @@ const FriendsList = ({ friendsList }) => {
         const userID = window.localStorage.getItem("userId")
 
         axios.post(url, { userID, friendID })
-        .then(() => {
-            // Request was successful, do something if needed
-            closePopup();
-            location.reload();
-        })
-        .catch(e => {     
-            setNoneUser(true);
-            console.log("Friend not found");
+            .then(() => {
+                // Request was successful, do something if needed
+                closePopup();
+                location.reload();
+            })
+            .catch(e => {     
+                setNoneUser(true);
+                console.log("Friend not found");
         });
         
     }
@@ -49,7 +49,7 @@ const FriendsList = ({ friendsList }) => {
                         </div>
                         <div className='text-dark-blue pb-4'>
                             Search up your friend's user ID to add them. Your ID is 
-                            <div className='text-pink'>
+                            <div className='text-pink font-bold'>
                                 {window.localStorage.getItem("userId")}
                             </div>
                         </div>

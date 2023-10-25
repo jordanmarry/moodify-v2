@@ -3,10 +3,7 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const UserModel = require("./model/Users")
 const SongModel = require("./model/Songs")
-const sanitize = require('mongo-sanitize')
-const bcrypt = require("bcrypt")
 const puppeteer = require('puppeteer')
-const cron = require('node-cron')
 const SongsModel = require('./model/Songs')
 
 require('dotenv').config()
@@ -189,6 +186,19 @@ app.post("/addFriend/:friendId", async (req, res) => {
             res.status(404).send("User not found.");
         }
     })
+})
+
+app.post("/removeFriend/:friendId", async (req, res) => {
+    const data = req.body
+    try {
+        const user = await UserModel.findOneAndUpdate(
+            { id: data.userID },
+            { $pull: { friends : { id: data.friendID } } }
+        );
+        res.status(200).send("Removed Friend Successfully");
+    } catch (e) {
+        res.status(500).send("Server Error")
+    }
 })
 
 app.post("/userSong", async (req, res) => {
