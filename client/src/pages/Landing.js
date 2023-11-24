@@ -26,6 +26,7 @@ const Landing = () => {
             if (data === 'Error Retreiving Data'){
                 setTopData(null)
             } else {
+                window.localStorage.setItem("topData", JSON.stringify(data))
                 setTopData(data)
             }
         } catch (error) {
