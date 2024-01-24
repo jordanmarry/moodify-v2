@@ -32,11 +32,11 @@ Retrieve your Spotify API credentials (Client ID, Client Secret) and your MongoD
 **4. Start the app**
 ```
 # Start the frontend server
-cd frontend
+cd client
 npm run dev
 
 # Start the backend server
-cd ../backend
+cd ../server
 npm start
 ```
 
